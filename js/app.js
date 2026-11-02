@@ -4,23 +4,40 @@
  */
 
 //Deklarasikan endpoint API 
-
+const API_URL = 'api/mahasiswa.php';
 // 1. Seleksi Elemen DOM Utama
 const tabelBody = document.getElementById('tabel-body-mahasiswa');
 const inputSearch = document.getElementById('input-search');
 const totalBadge = document.getElementById('total-mahasiswa-badge');
+const totalInfo = document.getElementById('total-mahasiswa-info');
+const formTambah = document.getElementById('form-tambah-mahasiswa');
+const alertBox = document.getElementById('alert-box');
 
 
 // Helper: Menampilkan Pesan Notifikasi Dinamis
 function showAlert(message, type = 'success') {
-   
+   if (!alertBox) return;
+    alertBox.textContent = message;
+    alertBox.className = `alert-box alert-${type}`;
+    alertBox.style.display = 'block';
+    setTimeout(() => {
+        alertBox.style.display = 'none';
+    }, 4000);
+
 }
 
 // 2. Fetch API GET: Mengambil Data Mahasiswa dari Server
 async function loadMahasiswa(keyword = '') {
 
     // tampilkan indikator loading
-    tabelBody.innerHTML = ``;
+    tabelBody.innerHTML = `
+    <tr>
+            <td colspan="8" style="text-align: center; padding: 20px; color: var(--text-muted);">
+                Memuat data dari server...
+            </td>
+        </tr>
+    `;
+
 
     try {
 
