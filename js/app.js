@@ -25,7 +25,13 @@ async function loadMahasiswa(keyword = '') {
     try {
 
         //Percobaan 6-1 Langkah 4 susun url request
-        
+         const result = await response.json();
+        if (result.status === 'success') {
+            renderTable(result.data, keyword);
+        } else {
+            showAlert(result.message, 'danger');
+        }
+
         //Percobaan 6-1 Langkah 4 kirim request
         
         //Percobaan 6-1 Langkah 4 kirim ekstrak json 
